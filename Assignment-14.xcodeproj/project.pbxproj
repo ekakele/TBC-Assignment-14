@@ -57,7 +57,6 @@
 			children = (
 				B5DC3D462AEE58C7007FD373 /* MainViewController.swift */,
 				B52192C72AEEF33E002D8F3F /* AddNewItemToListViewController.swift */,
-				B52192CA2AEEFAD3002D8F3F /* SongTableViewCell.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -76,6 +75,14 @@
 				B52192D12AEF1904002D8F3F /* ItemDetailsViewController.swift */,
 			);
 			path = SongDetails;
+			sourceTree = "<group>";
+		};
+		B54B9BC12AF13C910038FB5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B52192CA2AEEFAD3002D8F3F /* SongTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B5DC3D362AEE58C7007FD373 = {
@@ -99,6 +106,7 @@
 			children = (
 				B52192C62AEED6F1002D8F3F /* App */,
 				B52192D02AEF1243002D8F3F /* Models */,
+				B54B9BC12AF13C910038FB5C /* Views */,
 				B52192C92AEEFA8D002D8F3F /* Scenes */,
 				B52192D32AEF1929002D8F3F /* SongDetails */,
 				B5DC3D4B2AEE58C8007FD373 /* Assets.xcassets */,

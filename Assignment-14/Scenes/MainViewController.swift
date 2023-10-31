@@ -94,7 +94,7 @@ extension MainViewController: UITableViewDataSource {
 // MARK: - TableVIew Delegate Methods
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

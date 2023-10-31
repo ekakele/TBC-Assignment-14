@@ -15,7 +15,7 @@ final class SongTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.backgroundColor = .systemGray5
-        stackView.layoutMargins = .init(top: 10, left: 15, bottom: 10, right: 15)
+        stackView.layoutMargins = .init(top: 15, left: 10, bottom: 10, right: 10)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -23,7 +23,8 @@ final class SongTableViewCell: UITableViewCell {
     
     private let songNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.numberOfLines = 0
         label.textColor = .systemIndigo
         return label
     }()
@@ -38,9 +39,9 @@ final class SongTableViewCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         selectionStyle = .none
         setupView()
+        songImageViewConstraints()
         assembleCellStackView()
         setupCellStackViewConstraints()
     }
@@ -59,7 +60,7 @@ final class SongTableViewCell: UITableViewCell {
     //MARK: - Configure
     func configure(with model: Song) {
         songNameLabel.text = model.name
-        songImageView.image = UIImage(named: "model")
+        songImageView.image = model.image
     }
     
     // MARK: - Private Methods
@@ -68,6 +69,12 @@ final class SongTableViewCell: UITableViewCell {
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
+    }
+    
+    func songImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            songImageView.widthAnchor.constraint(equalToConstant: 100)
+        ])
     }
     
     private func assembleCellStackView() {
@@ -84,5 +91,4 @@ final class SongTableViewCell: UITableViewCell {
             cellStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
-    
 }
