@@ -12,7 +12,9 @@ final class MainViewController: UIViewController, AddNewSongDelegate {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .white
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -40,25 +42,13 @@ final class MainViewController: UIViewController, AddNewSongDelegate {
     
     private func setupNavigationBar() {
         self.navigationItem.title = "Music Playlist"
-        
-        //creating "+" button and making it navigable to the second page by push method
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: (UIImage(systemName: "plus.circle")), style: .plain, target: self, action: #selector(navigateToAddNewItemToListVCPage))
     }
     
-    //
     @objc private func navigateToAddNewItemToListVCPage() {
         let addNewItemToListVCPage = AddNewItemToListViewController()
         addNewItemToListVCPage.delegate = self
         self.navigationController?.pushViewController(addNewItemToListVCPage, animated: true)
-    }
-    
-    private func setupTableViewConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
     }
     
     private func setupTableView() {
@@ -69,6 +59,15 @@ final class MainViewController: UIViewController, AddNewSongDelegate {
         
     }
     
+    private func setupTableViewConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
+    }
+    
     func addNewSong(song: Song) {
         songs.append(song)
         tableView.reloadData()
@@ -77,18 +76,11 @@ final class MainViewController: UIViewController, AddNewSongDelegate {
 
 // MARK: - TableVIew DataSource Methods
 extension MainViewController: UITableViewDataSource {
-    //number of cells on the screen (without scrolling)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
     
-    //reusable cell creation and setup
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath)
-        //        cell.backgroundColor = .red
-        //        cell.textLabel?.text = "This cell is \(indexPath.row)"
-        //        return cell
-        
         let cell: UITableViewCell
         let song = songs[indexPath.row]
         cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath)
@@ -101,15 +93,11 @@ extension MainViewController: UITableViewDataSource {
 
 // MARK: - TableVIew Delegate Methods
 extension MainViewController: UITableViewDelegate {
-    //set cell size for a specific cell (retrieving by indexPath)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
-    //change cell color when selected/tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        tableView.cellForRow(at: indexPath)?.backgroundColor = .white
-        
         let itemDetailsViewController = ItemDetailsViewController()
         itemDetailsViewController.song = songs[indexPath.row]
         navigationController?.pushViewController(itemDetailsViewController, animated: true)
