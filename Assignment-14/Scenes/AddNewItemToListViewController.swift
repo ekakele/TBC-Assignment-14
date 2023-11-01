@@ -23,7 +23,6 @@ class AddNewItemToListViewController: UIViewController {
         textField.leftViewMode = .always
         textField.rightView = addPadding
         textField.rightViewMode = .always
-        
         textField.placeholder = "Enter Music Name"
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         textField.textColor = .black
@@ -40,14 +39,13 @@ class AddNewItemToListViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemIndigo
         button.layer.cornerRadius = 15
-        button.automaticallyUpdatesConfiguration = false
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
     
     private let uploadedImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
+        image.backgroundColor = .systemGray5
         return image
     }()
     
@@ -65,16 +63,15 @@ class AddNewItemToListViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemIndigo
         button.layer.cornerRadius = 15
-        button.automaticallyUpdatesConfiguration = false
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
     
     private lazy var wrapperStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nameTextField, uploadImageButton, uploadedImageView, saveButton])
+        let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.distribution = .fill
+        stackView.spacing = 50
+        stackView.backgroundColor = .clear
+        stackView.layoutMargins = .init(top: 50, left: 20, bottom: 50, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -85,6 +82,7 @@ class AddNewItemToListViewController: UIViewController {
         super.viewDidLoad()
         
         setupBackground()
+        setupButtons()
         setupSubviews()
         setupWrapperStackViewConstraints()
         setupUploadImageButtonAction()
@@ -101,21 +99,31 @@ class AddNewItemToListViewController: UIViewController {
         present(imagePicker, animated: true)
     }
     
+    private func setupButtons() {
+        NSLayoutConstraint.activate([
+            uploadImageButton.widthAnchor.constraint(equalToConstant: 50),
+            uploadImageButton.heightAnchor.constraint(equalToConstant: 50),
+            saveButton.widthAnchor.constraint(equalToConstant: 50),
+            saveButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
     private func setupSubviews() {
         view.addSubview(wrapperStackView)
+        wrapperStackView.addArrangedSubview(nameTextField)
+        wrapperStackView.addArrangedSubview(uploadImageButton)
+        wrapperStackView.addArrangedSubview(uploadedImageView)
+        wrapperStackView.addArrangedSubview(saveButton)
     }
     
     private func setupWrapperStackViewConstraints() {
         NSLayoutConstraint.activate([
-            wrapperStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            wrapperStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            wrapperStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -100),
-            wrapperStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            wrapperStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            wrapperStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            wrapperStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            wrapperStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            wrapperStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            wrapperStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-    
     
     private func setupUploadImageButtonAction() {
         uploadImageButton.addTarget(self, action: #selector(navigateToPhotoLibrary), for: .touchUpInside)
@@ -126,7 +134,6 @@ class AddNewItemToListViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
-        
         present(imagePicker, animated: true, completion: nil)
     }
     
