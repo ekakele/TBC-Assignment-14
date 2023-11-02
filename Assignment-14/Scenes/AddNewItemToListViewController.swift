@@ -24,6 +24,7 @@ class AddNewItemToListViewController: UIViewController {
         textField.rightView = addPadding
         textField.rightViewMode = .always
         textField.placeholder = "Enter Music Name"
+        textField.widthAnchor.constraint(equalToConstant: 300).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 15)
@@ -36,6 +37,8 @@ class AddNewItemToListViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Upload Image", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemIndigo
         button.layer.cornerRadius = 15
@@ -45,6 +48,8 @@ class AddNewItemToListViewController: UIViewController {
     private let uploadedImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleToFill
+        image.widthAnchor.constraint(equalToConstant: 400).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 400).isActive = true
         image.backgroundColor = .systemGray5
         return image
     }()
@@ -60,6 +65,8 @@ class AddNewItemToListViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemIndigo
         button.layer.cornerRadius = 15
@@ -71,6 +78,7 @@ class AddNewItemToListViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 50
         stackView.backgroundColor = .clear
+        stackView.alignment = .center
         stackView.layoutMargins = .init(top: 50, left: 20, bottom: 50, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +90,7 @@ class AddNewItemToListViewController: UIViewController {
         super.viewDidLoad()
         
         setupBackground()
-        setupButtons()
+        setupNavigationBar()
         setupSubviews()
         setupWrapperStackViewConstraints()
         setupUploadImageButtonAction()
@@ -94,18 +102,13 @@ class AddNewItemToListViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    private func setupNavigationBar() {
+        self.navigationItem.title = "Add New Song"
+    }
+    
     private func setupImagePicker() {
         imagePicker.delegate = self
         present(imagePicker, animated: true)
-    }
-    
-    private func setupButtons() {
-        NSLayoutConstraint.activate([
-            uploadImageButton.widthAnchor.constraint(equalToConstant: 50),
-            uploadImageButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.widthAnchor.constraint(equalToConstant: 50),
-            saveButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
     }
     
     private func setupSubviews() {

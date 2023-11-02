@@ -15,7 +15,7 @@ final class SongTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.backgroundColor = .systemGray5
-        stackView.layoutMargins = .init(top: 15, left: 10, bottom: 10, right: 10)
+        stackView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -33,6 +33,7 @@ final class SongTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named:"")
         imageView.contentMode = .scaleAspectFit
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         return imageView
     }()
     
@@ -41,7 +42,6 @@ final class SongTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupView()
-        songImageViewConstraints()
         assembleCellStackView()
         setupCellStackViewConstraints()
     }
@@ -69,12 +69,6 @@ final class SongTableViewCell: UITableViewCell {
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
-    }
-    
-    func songImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            songImageView.widthAnchor.constraint(equalToConstant: 100)
-        ])
     }
     
     private func assembleCellStackView() {

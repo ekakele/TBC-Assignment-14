@@ -25,7 +25,7 @@ class ItemDetailsViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named:"")
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: 400).isActive = true
         return imageView
     }()
     
@@ -48,11 +48,10 @@ class ItemDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureViews()
         setupBackground()
-        setupImage()
         setupSubviews()
         setupConstraints()
-        configureViews()
     }
     
     // MARK: - Configure
@@ -65,13 +64,6 @@ class ItemDetailsViewController: UIViewController {
     // MARK: - Private Methods
     private func setupBackground() {
         view.backgroundColor = .white
-    }
-    
-    private func setupImage() {
-        NSLayoutConstraint.activate([
-            songImageView.heightAnchor.constraint(equalToConstant: 1000),
-            songImageView.widthAnchor.constraint(equalTo: itemDetailsStackView.widthAnchor)
-        ])
     }
     
     private func setupSubviews() {
