@@ -82,7 +82,7 @@ final class SongTableViewCell: UITableViewCell {
             cellStackView.topAnchor.constraint(equalTo: self.topAnchor),
             cellStackView.leftAnchor.constraint(equalTo: self.leftAnchor),
             cellStackView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            cellStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            cellStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

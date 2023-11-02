@@ -72,6 +72,19 @@ final class MainViewController: UIViewController, AddNewSongDelegate {
         songs.append(song)
         tableView.reloadData()
     }
+    
+    // MARK: - Additional Actions on cell
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
+            self.songs.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return [deleteAction]
+    }
 }
 
 // MARK: - TableVIew DataSource Methods
